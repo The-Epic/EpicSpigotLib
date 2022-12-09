@@ -1,4 +1,4 @@
-package me.epic.spigotlib.storage;
+package me.epic.spigotlib.serialisation;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;

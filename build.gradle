@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'me.epic.spigotlib'
-version '1.0.1'
+version '1.0.0'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
 
@@ -22,14 +22,14 @@ repositories {
 }
 
 dependencies {
-    implementation "io.papermc:paperlib:1.0.7"
+    compileOnly "io.papermc:paperlib:1.0.7"
     compileOnly 'org.spigotmc:spigot:1.18.2-R0.1-SNAPSHOT'
     compileOnly group: 'net.kyori', name: 'adventure-text-minimessage', version: '4.11.0'
     compileOnly group: 'net.kyori', name: 'adventure-text-serializer-legacy', version: '4.11.0'
 }
 
 shadowJar {
-    relocate "io.papermc.lib", "me.epic.spigotlib.external.paperlib"
+    relocate "io.papermc.lib", "me.epic.spigotlib.paperlib"
 }
 
 publishing {
@@ -39,4 +39,3 @@ publishing {
         }
     }
 }
-
