@@ -10,8 +10,7 @@ public class MaterialSets {
 	public static final Set<Material> MEAT = EnumSet.of(Material.RABBIT, Material.COOKED_RABBIT, Material.RABBIT_STEW,
 			Material.PORKCHOP, Material.COOKED_PORKCHOP, Material.MUTTON, Material.COOKED_MUTTON, Material.CHICKEN,
 			Material.COOKED_CHICKEN, Material.BEEF, Material.COOKED_BEEF, Material.COD, Material.COOKED_COD,
-			Material.SALMON, Material.COOKED_SALMON, Material.SPIDER_EYE, Material.PUFFERFISH, Material.TROPICAL_FISH,
-			Material.ROTTEN_FLESH);
+			Material.SALMON, Material.COOKED_SALMON, Material.ROTTEN_FLESH);
 
 	public static final Set<Material> SWORDS = EnumSet.of(Material.WOODEN_SWORD, Material.STONE_SWORD,
 			Material.IRON_SWORD, Material.GOLDEN_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
@@ -36,7 +35,7 @@ public class MaterialSets {
 			Material.CHAINMAIL_CHESTPLATE, Material.IRON_CHESTPLATE, Material.GOLDEN_CHESTPLATE,
 			Material.DIAMOND_CHESTPLATE, Material.NETHERITE_CHESTPLATE);
 
-	public static final Set<Material> PANTS = EnumSet.of(Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
+	public static final Set<Material> LEGGINGS = EnumSet.of(Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
 			Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS, Material.NETHERITE_LEGGINGS);
 
 	public static final Set<Material> BOOTS = EnumSet.of(Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS,

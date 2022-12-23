@@ -1,6 +1,6 @@
 package me.epic.spigotlib;
 
-import me.epic.spigotlib.formatting.ColourUtils;
+import me.epic.spigotlib.formatting.Formatting;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -53,6 +53,6 @@ public class Debugger {
     }
 
     public static void toConsole(String toConsole) {
-        System.out.println(ColourUtils.translate("<#733bfb>[Epic SpigotLib] Debug: ") + toConsole);
+        System.out.println(Formatting.translate("<#733bfb>[Epic SpigotLib] Debug: ") + toConsole);
     }
 }

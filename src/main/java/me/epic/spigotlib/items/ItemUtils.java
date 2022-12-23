@@ -10,6 +10,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtils {
 
+	/**
+	 * Reduces durability of an item
+	 *
+	 * @param entity For the sound playing
+	 * @param item To remove damage from
+	 * @param slot To reduce durability from
+	 */
 	public static void reduceDurability(LivingEntity entity, ItemStack item, EquipmentSlot slot) {
 		ItemMeta meta = item.getItemMeta();
 

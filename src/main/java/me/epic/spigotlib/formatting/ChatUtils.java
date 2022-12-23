@@ -60,7 +60,7 @@ public enum ChatUtils {
 		if (message == null || message.equals("")) {
 			return "";
 		}
-		message = ColourUtils.translate(message);
+		message = Formatting.translate(message);
 
 		int messagePxSize = 0;
 		boolean previousCode = false;

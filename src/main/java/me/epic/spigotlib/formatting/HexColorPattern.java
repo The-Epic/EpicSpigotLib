@@ -15,7 +15,7 @@ public class HexColorPattern implements ChatStylePattern {
             final String color = matcher.group(1) != null ? matcher.group(1)
                     : matcher.group(2) != null ? matcher.group(2) : matcher.group(3);
 
-            message = message.replace(matcher.group(), ColourUtils.getColorFromHex(color) + "");
+            message = message.replace(matcher.group(), Formatting.getColorFromHex(color) + "");
         }
 
         return message;

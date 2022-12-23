@@ -13,7 +13,7 @@ public class ModifierPattern implements ChatStylePattern {
         while (matcher.find()) {
             final ModifierType type = ModifierType.fromString(matcher.group(1));
             final String text = matcher.group(2);
-            message = message.replace(matcher.group(), ColourUtils.applyModifier(text, type));
+            message = message.replace(matcher.group(), Formatting.applyModifier(text, type));
         }
 
         return message;

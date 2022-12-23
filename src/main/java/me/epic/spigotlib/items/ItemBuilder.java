@@ -1,5 +1,6 @@
 package me.epic.spigotlib.items;
 
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,6 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.properties.PropertyMap;
+import me.epic.spigotlib.Version;
+import me.epic.spigotlib.formatting.Formatting;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -80,14 +86,14 @@ public class ItemBuilder {
 	}
 
 	public ItemBuilder name(String name) {
-		this.meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
+		this.meta.setDisplayName(Formatting.translate(name));
 
 		return this;
 	}
 
 	public ItemBuilder lore(List<String> lore) {
 		List<String> itemLore = getLore();
-		lore = lore.stream().map(line -> ChatColor.translateAlternateColorCodes('&', line)).toList();
+		lore = lore.stream().map(line -> Formatting.translate(line)).toList();
 		itemLore.addAll(lore);
 
 		meta.setLore(itemLore);
@@ -115,18 +121,33 @@ public class ItemBuilder {
 	public ItemBuilder skullTexture(String texture) {
 		if (!(this.meta instanceof SkullMeta))
 			return this;
+		if (Version.getServerVersion().equals("1.17.1") || Version.getServerVersion().equals("1.17")) {
+			GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "");
+			PropertyMap propertyMap = gameProfile.getProperties();
+			propertyMap.put("textures", new Property("textures", texture));
 
-		PlayerProfile profile = Bukkit.createPlayerProfile(UUID.nameUUIDFromBytes(texture.getBytes()));
-		PlayerTextures textures = profile.getTextures();
-		try {
-			textures.setSkin(new URL(TEXTURE_URL + texture));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			try {
+				Field profileField = ((SkullMeta) meta).getClass().getDeclaredField("profile");
+				profileField.setAccessible(true);
+				profileField.set(meta, gameProfile);
+				profileField.setAccessible(false);
+			} catch (NoSuchFieldException | IllegalAccessException ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			PlayerProfile profile = Bukkit.createPlayerProfile(UUID.nameUUIDFromBytes(texture.getBytes()));
+			PlayerTextures textures = profile.getTextures();
+			try {
+				textures.setSkin(new URL(TEXTURE_URL + texture));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+
+			profile.setTextures(textures);
+			((SkullMeta) this.meta).setOwnerProfile(profile);
 		}
-
-		profile.setTextures(textures);
-		((SkullMeta) this.meta).setOwnerProfile(profile);
 		return this;
+
 	}
 
 	public <T, Z> ItemBuilder persistentData(NamespacedKey key, PersistentDataType<T, Z> type, Z value) {

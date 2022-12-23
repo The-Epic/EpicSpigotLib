@@ -15,21 +15,18 @@ compileTestJava.options.encoding = "UTF-8"
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        name "papermc"
-        url "https://papermc.io/repo/repository/maven-public/"
-    }
 }
 
 dependencies {
-    compileOnly "io.papermc:paperlib:1.0.7"
+    compileOnly 'org.spigotmc:spigot:1.17.1-R0.1-SNAPSHOT'
     compileOnly 'org.spigotmc:spigot:1.18.2-R0.1-SNAPSHOT'
     compileOnly group: 'net.kyori', name: 'adventure-text-minimessage', version: '4.11.0'
     compileOnly group: 'net.kyori', name: 'adventure-text-serializer-legacy', version: '4.11.0'
 }
 
 shadowJar {
-    relocate "io.papermc.lib", "me.epic.spigotlib.paperlib"
+    relocate "net.kyori.adventure-text-minimessage", "me.epic.spigotlib.minimessage"
+    relocate "net.kyori.adventure-text-serializer-legacy", "me.epic.spigotlib.legacy-serializer"
 }
 
 publishing {

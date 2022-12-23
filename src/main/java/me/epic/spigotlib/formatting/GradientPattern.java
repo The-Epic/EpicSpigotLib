@@ -16,9 +16,9 @@ public class GradientPattern implements ChatStylePattern {
             final String color2 = matcher.group(2) != null ? matcher.group(2) : matcher.group(4);
             final String text = matcher.group(3) != null ? matcher.group(3) : matcher.group(5);
 
-            final net.md_5.bungee.api.ChatColor[] gradient = ColourUtils.gradient(color1, color2, text.length());
+            final net.md_5.bungee.api.ChatColor[] gradient = Formatting.gradient(color1, color2, text.length());
 
-            message = message.replace(matcher.group(), ColourUtils.applyColorArray(text, gradient));
+            message = message.replace(matcher.group(), Formatting.applyColorArray(text, gradient));
         }
 
         return message;

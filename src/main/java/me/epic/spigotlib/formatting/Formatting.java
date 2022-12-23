@@ -11,7 +11,7 @@ import java.util.List;
 import java.awt.Color;
 
 @SuppressWarnings("all")
-public class ColourUtils {
+public class Formatting {
 
     private static final ChatStylePattern[] COLOR_PATTERNS = new ChatStylePattern[] {
             new HexColorPattern(),
