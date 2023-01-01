@@ -25,6 +25,7 @@ dependencies {
 }
 
 shadowJar {
+    archiveClassifier.set('')
     relocate "net.kyori.adventure-text-minimessage", "me.epic.spigotlib.minimessage"
     relocate "net.kyori.adventure-text-serializer-legacy", "me.epic.spigotlib.legacy-serializer"
 }
