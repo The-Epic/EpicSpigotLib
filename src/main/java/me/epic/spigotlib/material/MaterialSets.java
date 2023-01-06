@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import org.bukkit.Material;
+import org.bukkit.Tag;
 
 public class MaterialSets {
 
@@ -40,4 +41,12 @@ public class MaterialSets {
 
 	public static final Set<Material> BOOTS = EnumSet.of(Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS,
 			Material.IRON_BOOTS, Material.GOLDEN_BOOTS, Material.DIAMOND_BOOTS, Material.NETHERITE_BOOTS);
+
+	public static final Set<Material> SLABS = Tag.SLABS.getValues();
+
+	public static final Set<Material> STAIRS = Tag.STAIRS.getValues();
+
+	public static final Set<Material> SIGNS = Tag.SIGNS.getValues();
+
+
 }
