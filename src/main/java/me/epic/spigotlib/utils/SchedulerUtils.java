@@ -16,4 +16,8 @@ public class SchedulerUtils {
         plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 60);
     }
 
+    public static void oneTickDelay(Plugin plugin, Runnable runnable) {
+        plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 1);
+    }
+
 }

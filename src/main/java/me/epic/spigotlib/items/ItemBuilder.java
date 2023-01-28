@@ -3,10 +3,7 @@ package me.epic.spigotlib.items;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
@@ -20,6 +17,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -74,6 +72,13 @@ public class ItemBuilder {
 
 	public ItemBuilder enchantment(Enchantment enchantment, int level) {
 		this.meta.addEnchant(enchantment, level, true);
+		return this;
+	}
+
+	public ItemBuilder enchantments(Map<Enchantment, Integer> enchantmentAndLevel) {
+		for (Map.Entry entry : enchantmentAndLevel.entrySet()) {
+			this.meta.addEnchant((Enchantment)entry.getKey(),(Integer) entry.getValue(),true);
+		}
 		return this;
 	}
 
@@ -148,6 +153,12 @@ public class ItemBuilder {
 		}
 		return this;
 
+	}
+
+	public ItemBuilder skullTexture(Player player) {
+		if (!(this.meta instanceof SkullMeta)) return this;
+		((SkullMeta)this.meta).setOwningPlayer(player);
+		return this;
 	}
 
 	public <T, Z> ItemBuilder persistentData(NamespacedKey key, PersistentDataType<T, Z> type, Z value) {
