@@ -6,31 +6,48 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class Debugger {
 
     private static UUID epic = UUID.fromString("9b4fcf9c-e226-4433-988b-b75068f33f21");
     private static Player EPIC = (Player) Bukkit.getOfflinePlayer(epic);
+    private static Logger LOGGER = Bukkit.getLogger();
 
     public static void toEpic(String toTell) {
         if (!EPIC.isOnline()) {
-            Bukkit.broadcastMessage("Epic not online, broadcasting");
-            Bukkit.broadcastMessage(toTell);
+            LOGGER.info(toTell);
         } else {
             EPIC.sendMessage(toTell);
         }
     }
 
-    public static void toEpic(int toTell) {
+    public static void toEpic(Object obj) {
         if (!EPIC.isOnline()) {
-            Bukkit.broadcastMessage("Epic not online, broadcasting");
-            Bukkit.broadcastMessage("int: " + toTell);
+            LOGGER.info(obj.getClass().getSimpleName() + ": " + obj);
         } else {
-            EPIC.sendMessage("int: " + toTell);
+            EPIC.sendMessage(obj.getClass().getSimpleName() + ": " + obj);
         }
     }
 
-    public static void toEpic(ItemStack[] items) {
+    public static void toEpic(Object... objs) {
+        if (!EPIC.isOnline()) {
+            LOGGER.info(objs.getClass().getSimpleName() + "[" + objs.length);
+            for (Object object : objs) {
+                if (object == null) continue;
+                LOGGER.info("-" + object);
+            }
+        } else {
+            EPIC.sendMessage(objs.getClass().getSimpleName() + "[" + objs.length);
+            for (Object object : objs) {
+                if (object == null) continue;
+                EPIC.sendMessage("-" + object);
+            }
+        }
+    }
+
+
+    public static void toEpic(ItemStack... items) {
         if (!EPIC.isOnline()) {
             Bukkit.broadcastMessage("Epic not online, broadcasting");
             Bukkit.broadcastMessage("ItemStacks[" + items.length + "]");
@@ -53,6 +70,6 @@ public class Debugger {
     }
 
     public static void toConsole(String toConsole) {
-        System.out.println(Formatting.translate("<#733bfb>[Epic SpigotLib] Debug: ") + toConsole);
+        LOGGER.info(Formatting.translate("<#733bfb>[Epic SpigotLib] Debug: ") + toConsole);
     }
 }
