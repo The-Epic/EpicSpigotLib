@@ -30,13 +30,13 @@ jobs:
       with:
         java-version: '16'
         distribution: 'adopt'
+    - name: Mc Spigot
+      uses: SpraxDev/Action-SpigotMC@v4.1.0
+      with:
+        versions: 1.17, 1.18.2
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 7.0.2
     - name: Execute Gradle build
       run: chmod +x gradlew && ./gradlew build
-    - name: Mc Spigot
-      uses: SpraxDev/Action-SpigotMC@v4.1.0
-      with:
-        versions: 1.17, 1.18.2
