@@ -30,6 +30,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
+        cache: gradle
     - name: Mc Spigot 1.18
       uses: SpraxDev/Action-SpigotMC@v4.1.0
       with:
@@ -40,6 +41,7 @@ jobs:
       with:
         java-version: '16'
         distribution: 'adopt'
+        cache: gradle
     - name: Mc Spigot 1.17
       uses: SpraxDev/Action-SpigotMC@v4.1.0
       with:
@@ -55,6 +57,6 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: publish
-        password: ${secrets.GIT_TOKEN}
+        password: ${{secrets.GIT_TOKEN}}
       env:
-        password: ${secrets.GIT_TOKEN}
+        password: ${{secrets.GIT_TOKEN}}
