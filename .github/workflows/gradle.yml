@@ -35,7 +35,7 @@ jobs:
       with:
         gradle-version: 7.0.2
     - name: Execute Gradle build
-      run: ./gradlew build
+      run: chmod +x gradlew && ./gradlew build
     - name: Mc Spigot
       uses: SpraxDev/Action-SpigotMC@v4.1.0
       with:
