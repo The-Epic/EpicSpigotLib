@@ -3,9 +3,13 @@ package me.epic.spigotlib;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Scanner;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Consumer;
 
@@ -32,5 +36,29 @@ public class UpdateChecker {
 				plugin.getLogger().warning("Unable to check for updates: " + exception.getMessage());
 			}
 		});
+	}
+
+	/**
+	 * Runs the update checker and sends message if update is found
+	 *
+	 * @param interval between update checks
+	 * @param resourceLink spigot/whatever link
+	 * @param enabled updateChecker enabled
+	 * @param pluginName to give name in update message
+	 */
+	public void runUpdateChecker(Integer interval, String resourceLink, Boolean enabled, String pluginName) {
+		SimpleSemVersion currentVersion = SimpleSemVersion.fromString(plugin.getDescription().getVersion());
+		Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, task -> {
+			if (!enabled) task.cancel();
+			this.getVersion(version -> {
+				if (SimpleSemVersion.fromString(version).isNewerThan(currentVersion)) {
+					ConsoleCommandSender console = Bukkit.getConsoleSender();
+					console.sendMessage("-".repeat(50));
+					console.sendMessage("A new version of " + pluginName + " is available: " + ChatColor.BOLD + version);
+					console.sendMessage("Download it at " + resourceLink);
+					console.sendMessage("-".repeat(50));
+				}
+			});
+		}, 0, 20L * 60 * 60 * (interval == null ? 2 : interval));
 	}
 }
