@@ -52,6 +52,4 @@ jobs:
       with:
         gradle-version: 7.0.2
     - name: Execute Gradle build
-      run: chmod +x gradlew && ./gradlew -DGIT_TOKEN=${{secrets.GIT_TOKEN}} build
-    - name: Publish to github packages
-      run: ./gradlew -DGIT_TOKEN=${{secrets.GIT_TOKEN}} publish
+      run: chmod +x gradlew && ./gradlew build
