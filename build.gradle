@@ -5,7 +5,8 @@ plugins {
 }
 
 group 'me.epic'
-version '1.0.0'
+version '1.0.0-SNAPSHOT'
+description "Epic's Spigot Lib"
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
 
@@ -41,7 +42,8 @@ publishing {
             repositories {
                 maven {
                     credentials {
-                        username = "${GIT_TOKEN}"
+                        username = "The-Epic"
+                        password = "${GIT_TOKEN}"
                     }
 
                     url = 'https://maven.pkg.github.com/The-Epic/EpicSpigotLib'

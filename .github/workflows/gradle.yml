@@ -54,4 +54,4 @@ jobs:
       with:
         arguments: publish
       env:
-        USERNAME: ${{ secrets.GIT_TOKEN }}
+        PASSWORD: ${{ secrets.GIT_TOKEN }}
