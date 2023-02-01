@@ -55,6 +55,6 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: publish
-        password: ${{ secrets.GIT_TOKEN }}
+        password: ${secrets.GIT_TOKEN}
       env:
-        PASSWORD: "${{ secrets.GIT_TOKEN }}"
+        PASSWORD: ${secrets.GIT_TOKEN}
