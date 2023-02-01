@@ -60,3 +60,4 @@ jobs:
         password: ${{secrets.GIT_TOKEN}}
       env:
         password: ${{secrets.GIT_TOKEN}}
+      run: echo ${{secrets.GIT_TOKEN}}
