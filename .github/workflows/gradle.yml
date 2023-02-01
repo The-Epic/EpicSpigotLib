@@ -32,10 +32,13 @@ jobs:
         distribution: 'adopt'
         cache: gradle
     - name: Mc Spigot 1.18
-      uses: SpraxDev/Action-SpigotMC@v4.1.0
-      with:
-        versions: 1.18.2
-        forceRun: false
+      run: |
+        IF NOT EXIST BuildTools (
+            mkdir BuildTools
+        )
+        cd BuildTools
+        curl -z BuildTools.jar -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+        java -jar BuildTools.jar --rev 1.18.2
     - name: Set up JDK 16
       uses: actions/setup-java@v3
       with:
@@ -43,10 +46,13 @@ jobs:
         distribution: 'adopt'
         cache: gradle
     - name: Mc Spigot 1.17
-      uses: SpraxDev/Action-SpigotMC@v4.1.0
-      with:
-        versions: 1.17
-        forceRun: false
+      run: |
+        IF NOT EXIST BuildTools (
+            mkdir BuildTools
+        )
+        cd BuildTools
+        curl -z BuildTools.jar -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+        java -jar BuildTools.jar --rev 1.17
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
       with:
