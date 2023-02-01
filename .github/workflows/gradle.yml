@@ -32,9 +32,8 @@ jobs:
         distribution: 'adopt'
         cache: gradle
     - run: |
-        IF NOT EXIST BuildTools (
-            mkdir BuildTools
-        )
+        IF NOT EXIST BuildTools mkdir BuildTools
+      
         cd BuildTools
         curl -z BuildTools.jar -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
         java -jar BuildTools.jar --rev 1.18.2
@@ -45,9 +44,8 @@ jobs:
         distribution: 'adopt'
         cache: gradle
     - run: |
-        IF NOT EXIST BuildTools (
-            mkdir BuildTools
-        )
+        IF NOT EXIST BuildTools mkdir BuildTools
+      
         cd BuildTools
         curl -z BuildTools.jar -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
         java -jar BuildTools.jar --rev 1.17
