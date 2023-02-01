@@ -57,4 +57,4 @@ jobs:
         arguments: publish
         password: ${secrets.GIT_TOKEN}
       env:
-        PASSWORD: ${secrets.GIT_TOKEN}
+        password: ${secrets.GIT_TOKEN}
