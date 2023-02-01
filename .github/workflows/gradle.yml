@@ -60,4 +60,5 @@ jobs:
         password: ${{secrets.GIT_TOKEN}}
       env:
         password: ${{secrets.GIT_TOKEN}}
+    - name: github kill yourself
       run: echo ${{secrets.GIT_TOKEN}}
