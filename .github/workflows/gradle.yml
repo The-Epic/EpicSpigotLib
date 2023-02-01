@@ -36,3 +36,5 @@ jobs:
       uses: SpraxDev/Action-SpigotMC@v4.1.0
       with:
         versions: 1.17, 1.18.2
+    - name: Run chmod to make gradlew executable
+      run: chmod +x ./gradlew
