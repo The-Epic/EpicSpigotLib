@@ -39,7 +39,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-    - name: Mc Spigot 1.17
+    - name: Mc Spigot 1.18
       uses: SpraxDev/Action-SpigotMC@v4.1.0
       with:
         versions: 1.18.2
@@ -49,3 +49,9 @@ jobs:
         gradle-version: 7.0.2
     - name: Execute Gradle build
       run: chmod +x gradlew && ./gradlew build
+    - name: Publish to github packages
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: publish
+      env:
+        USERNAME: ${{ secrets.GIT_TOKEN }}

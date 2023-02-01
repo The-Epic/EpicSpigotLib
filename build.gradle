@@ -37,6 +37,16 @@ publishing {
     publications {
         shadow(MavenPublication) { publication ->
             project.shadow.component(publication)
+
+            repositories {
+                maven {
+                    credentials {
+                        username = "${GIT_TOKEN}"
+                    }
+
+                    url = 'https://maven.pkg.github.com/The-Epic/EpicSpigotLib'
+                }
+            }
         }
 
     }
