@@ -43,7 +43,11 @@ publishing {
                 maven {
                     credentials {
                         username = "The-Epic"
-                        password = "${GIT_TOKEN}"
+                        if (System.getenv("GIT_TOKEN") != null) {
+                            password = System.getenv("GIT_TOKEN")
+                        } else {
+                            password = "${GIT_TOKEN}"
+                        }
                     }
 
                     url = 'https://maven.pkg.github.com/The-Epic/EpicSpigotLib'
