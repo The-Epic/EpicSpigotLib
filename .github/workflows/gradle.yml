@@ -53,6 +53,10 @@ jobs:
         gradle-version: 7.0.2
     - name: Execute Gradle build
       run: chmod +x gradlew && ./gradlew build
+      with:
+        password: ${{secrets.GIT_TOKEN}}
+      env:
+        password: ${{secrets.GIT_TOKEN}}
     - name: Publish to github packages
       uses: gradle/gradle-build-action@v2
       with:
