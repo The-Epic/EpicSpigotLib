@@ -31,8 +31,7 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
         cache: gradle
-    - name: Mc Spigot 1.18
-      run: |
+    - run: |
         IF NOT EXIST BuildTools (
             mkdir BuildTools
         )
@@ -45,8 +44,7 @@ jobs:
         java-version: '16'
         distribution: 'adopt'
         cache: gradle
-    - name: Mc Spigot 1.17
-      run: |
+    - run: |
         IF NOT EXIST BuildTools (
             mkdir BuildTools
         )
