@@ -7,7 +7,6 @@ plugins {
 group 'me.epic'
 version '1.0.0-SNAPSHOT'
 description "Epic's Spigot Lib"
-boolean publish = false
 
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
@@ -25,32 +24,27 @@ dependencies {
     compileOnly 'org.spigotmc:spigot:1.18.2-R0.1-SNAPSHOT'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     implementation 'org.projectlombok:lombok:1.18.24'
-    implementation group: 'net.kyori', name: 'adventure-text-minimessage', version: '4.11.0'
-    implementation group: 'net.kyori', name: 'adventure-text-serializer-legacy', version: '4.11.0'
-    implementation 'com.zaxxer:HikariCP:5.0.1'
+    compileOnly group: 'net.kyori', name: 'adventure-text-minimessage', version: '4.11.0'
+    compileOnly group: 'net.kyori', name: 'adventure-text-serializer-legacy', version: '4.11.0'
+    compileOnly 'com.zaxxer:HikariCP:5.0.1'
 }
 
 shadowJar {
     archiveClassifier.set('')
-    relocate "net.kyori.adventure-text-minimessage", "me.epic.spigotlib.minimessage"
-    relocate "net.kyori.adventure-text-serializer-legacy", "me.epic.spigotlib.legacy-serializer"
 }
 
 publishing {
     publications {
         shadow(MavenPublication) { publication ->
             project.shadow.component(publication)
-
-            if (publish) {
-                repositories {
-                    maven {
-                        credentials {
-                            username = "The-Epic"
-                            password = "$GIT_TOKEN"
-                        }
-
-                        url = 'https://maven.pkg.github.com/The-Epic/EpicSpigotLib'
+            repositories {
+                maven {
+                    credentials {
+                        username = "The-Epic"
+                        password = "$GIT_TOKEN"
                     }
+
+                    url = 'https://maven.pkg.github.com/The-Epic/EpicSpigotLib'
                 }
             }
         }
