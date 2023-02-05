@@ -19,4 +19,8 @@ public class Version {
 		return Bukkit.getBukkitVersion().substring(0, Bukkit.getBukkitVersion().indexOf("-"));
 	}
 
+	public static String getServerVersionUnderscores() {
+		return getServerVersion().replace(".", "_");
+	}
+
 }

@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.function.Supplier;
-public interface PDC {
+public interface PDT {
 
     /*
      * Custom PersistentDataTypes

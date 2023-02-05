@@ -1,6 +1,6 @@
 package me.epic.spigotlib.pdc.datatypes.collections;
 
-import me.epic.spigotlib.PDC;
+import me.epic.spigotlib.PDT;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -43,7 +43,7 @@ public class ArrayDataType<T> implements PersistentDataType<PersistentDataContai
     @Override
     public PersistentDataContainer toPrimitive(final T[] array, final @NotNull PersistentDataAdapterContext context) {
         final PersistentDataContainer pdc = context.newPersistentDataContainer();
-        pdc.set(KEY_SIZE, PDC.INTEGER, array.length);
+        pdc.set(KEY_SIZE, PDT.INTEGER, array.length);
         for (int i = 0; i < array.length; i++) {
             final T data = array[i];
             if(data != null) {
@@ -55,7 +55,7 @@ public class ArrayDataType<T> implements PersistentDataType<PersistentDataContai
 
     @Override
     public T[] fromPrimitive(final @NotNull PersistentDataContainer pdc, final @NotNull PersistentDataAdapterContext persistentDataAdapterContext) {
-        final Integer size = pdc.get(KEY_SIZE, PDC.INTEGER);
+        final Integer size = pdc.get(KEY_SIZE, PDT.INTEGER);
 
         if (size == null) {
             throw new IllegalArgumentException(E_NOT_AN_ARRAY);

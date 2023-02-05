@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Cooldowns {
     private final Map<UUID, Integer> cooldowns = new HashMap<>();
 
-    public final int defaultCooldown;
+    public int defaultCooldown = 10;
 
     public Cooldowns(int defaultCooldown) {
         this.defaultCooldown = defaultCooldown;

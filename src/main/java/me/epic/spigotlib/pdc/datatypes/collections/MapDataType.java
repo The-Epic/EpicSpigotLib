@@ -1,6 +1,6 @@
 package me.epic.spigotlib.pdc.datatypes.collections;
 
-import me.epic.spigotlib.PDC;
+import me.epic.spigotlib.PDT;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -54,7 +54,7 @@ public class MapDataType<M extends Map<K, V>, K, V> implements PersistentDataTyp
         final PersistentDataContainer pdc = context.newPersistentDataContainer();
         int index = 0;
         final int size = map.size();
-        pdc.set(KEY_SIZE, PDC.INTEGER, size);
+        pdc.set(KEY_SIZE, PDT.INTEGER, size);
         for (final K key : map.keySet()) {
             if (key == null) {
                 throw new IllegalArgumentException(E_KEY_MUST_NOT_BE_NULL);
@@ -72,7 +72,7 @@ public class MapDataType<M extends Map<K, V>, K, V> implements PersistentDataTyp
     @Override
     public M fromPrimitive(@NotNull final PersistentDataContainer pdc, @NotNull final PersistentDataAdapterContext context) {
         final M map = mapSupplier.get();
-        final Integer size = pdc.get(KEY_SIZE, PDC.INTEGER);
+        final Integer size = pdc.get(KEY_SIZE, PDT.INTEGER);
         if (size == null) {
             throw new IllegalArgumentException(E_NOT_A_MAP);
         }

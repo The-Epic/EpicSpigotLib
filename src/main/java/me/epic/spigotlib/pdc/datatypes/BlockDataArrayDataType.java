@@ -1,7 +1,7 @@
 
 package me.epic.spigotlib.pdc.datatypes;
 
-import me.epic.spigotlib.PDC;
+import me.epic.spigotlib.PDT;
 import org.bukkit.Bukkit;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.persistence.PersistentDataAdapterContext;
@@ -25,11 +25,11 @@ public class BlockDataArrayDataType implements PersistentDataType<byte[], BlockD
 
     @Override
     public byte [] toPrimitive(final BlockData [] blockData, final @NotNull PersistentDataAdapterContext context) {
-        return PDC.STRING_ARRAY.toPrimitive(Arrays.stream(blockData).map(BlockData::getAsString).toArray(String[]::new),context);
+        return PDT.STRING_ARRAY.toPrimitive(Arrays.stream(blockData).map(BlockData::getAsString).toArray(String[]::new),context);
     }
 
     @Override
     public BlockData [] fromPrimitive(final byte [] bytes, final @NotNull PersistentDataAdapterContext context) {
-        return Arrays.stream(PDC.STRING_ARRAY.fromPrimitive(bytes, context)).map(Bukkit::createBlockData).toArray(BlockData[]::new);
+        return Arrays.stream(PDT.STRING_ARRAY.fromPrimitive(bytes, context)).map(Bukkit::createBlockData).toArray(BlockData[]::new);
     }
 }

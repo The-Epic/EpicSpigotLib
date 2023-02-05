@@ -1,6 +1,6 @@
 package me.epic.spigotlib.pdc.datatypes.collections;
 
-import me.epic.spigotlib.PDC;
+import me.epic.spigotlib.PDT;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -45,7 +45,7 @@ public class CollectionDataType<C extends Collection<T>, T> implements Persisten
     @Override
     public PersistentDataContainer toPrimitive(@NotNull final C collection, @NotNull final PersistentDataAdapterContext context) {
         final PersistentDataContainer pdc = context.newPersistentDataContainer();
-        pdc.set(KEY_SIZE, PDC.INTEGER, collection.size());
+        pdc.set(KEY_SIZE, PDT.INTEGER, collection.size());
         int index = 0;
         for (final T data : collection) {
             if (data != null) {
@@ -60,7 +60,7 @@ public class CollectionDataType<C extends Collection<T>, T> implements Persisten
     @Override
     public C fromPrimitive(@NotNull final PersistentDataContainer pdc, @NotNull final PersistentDataAdapterContext context) {
         final C collection = (C) collectionSupplier.get();
-        final Integer size = pdc.get(KEY_SIZE, PDC.INTEGER);
+        final Integer size = pdc.get(KEY_SIZE, PDT.INTEGER);
         if (size == null) {
             throw new IllegalArgumentException(E_NOT_A_COLLECTION);
         }
