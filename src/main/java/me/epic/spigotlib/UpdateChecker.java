@@ -44,9 +44,8 @@ public class UpdateChecker {
 	 * @param interval between update checks
 	 * @param resourceLink spigot/whatever link
 	 * @param enabled updateChecker enabled
-	 * @param pluginName to give name in update message
 	 */
-	public void runUpdateChecker(Integer interval, String resourceLink, Boolean enabled, String pluginName) {
+	public void runUpdateChecker(Integer interval, String resourceLink, Boolean enabled) {
 		SimpleSemVersion currentVersion = SimpleSemVersion.fromString(plugin.getDescription().getVersion());
 		Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, task -> {
 			if (!enabled) task.cancel();
@@ -54,7 +53,7 @@ public class UpdateChecker {
 				if (SimpleSemVersion.fromString(version).isNewerThan(currentVersion)) {
 					ConsoleCommandSender console = Bukkit.getConsoleSender();
 					console.sendMessage("-".repeat(50));
-					console.sendMessage("A new version of " + pluginName + " is available: " + ChatColor.BOLD + version);
+					console.sendMessage("A new version of " + plugin.getDescription().getName() + " is available: " + ChatColor.BOLD + version);
 					console.sendMessage("Download it at " + resourceLink);
 					console.sendMessage("-".repeat(50));
 				}
