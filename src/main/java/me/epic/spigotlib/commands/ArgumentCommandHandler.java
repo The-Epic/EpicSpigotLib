@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import me.epic.spigotlib.language.MessageConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,30 +16,35 @@ import org.bukkit.util.StringUtil;
 
 public class ArgumentCommandHandler extends SimpleCommandHandler {
 	private final Map<String, SimpleCommandHandler> subcommands = new HashMap<>();
+	private final MessageConfig messageConfig;
 
 	private CommandExecutor defaultExecutor;
 
-	public ArgumentCommandHandler(String permission) {
+	public ArgumentCommandHandler(MessageConfig messageConfig, String permission) {
 		super(permission);
+		this.messageConfig = messageConfig;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 		if (!sender.hasPermission(getPermission())) {
-			return false;
+			sender.sendMessage(messageConfig.getString("no-permission"));
+			return true;
 		}
 
 		if (args.length == 0) {
 			if (this.defaultExecutor != null) {
 				return this.defaultExecutor.onCommand(sender, command, alias, args);
 			} else {
-				return false;
+				sendUsage(sender, "none");
+				return true;
 			}
 		} else if (args.length > 0) {
 			SimpleCommandHandler executor = this.subcommands.get(args[0]);
 
 			if (executor == null) {
-				return false;
+				sendUsage(sender, args[0]);
+				return true;
 			}
 
 			return executor.onCommand(sender, command, alias, Arrays.copyOfRange(args, 1, args.length + 1));
@@ -65,6 +71,14 @@ public class ArgumentCommandHandler extends SimpleCommandHandler {
 				return executor.onTabComplete(sender, command, alias, Arrays.copyOfRange(args, 1, args.length + 1));
 		}
 		return Collections.emptyList();
+	}
+
+	private void sendUsage(CommandSender sender, String arg) {
+		String msg = messageConfig.getString("command-usage");
+		msg = msg.replace("%arg%", arg);
+		msg = msg.replace("%args%", String.join(", ", this.subcommands.keySet()));
+
+		sender.sendMessage(msg);
 	}
 
 	public void addArgumentExecutor(String arg, SimpleCommandHandler executor) {

@@ -23,4 +23,8 @@ public class Version {
 		return getServerVersion().replace(".", "_");
 	}
 
+	public static String getServerNMSVersion() {
+		return Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+	}
+
 }

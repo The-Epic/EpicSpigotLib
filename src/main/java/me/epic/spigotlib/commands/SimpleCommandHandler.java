@@ -32,6 +32,11 @@ public abstract class SimpleCommandHandler implements CommandExecutor, TabComple
 		return Collections.emptyList();
 	}
 
+	@Override
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+		return false;
+	}
+
 	/**
 	 * Gets the permission for the command
 	 * @return The Permission

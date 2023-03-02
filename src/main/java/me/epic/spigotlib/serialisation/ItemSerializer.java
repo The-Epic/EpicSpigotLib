@@ -1,5 +1,6 @@
 package me.epic.spigotlib.serialisation;
 
+import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -191,6 +192,29 @@ public class ItemSerializer {
             return items;
         } catch (final ClassNotFoundException e) {
             throw new IOException("Unable to decode class type.", e);
+        }
+    }
+
+    public static String itemStackToBase64(final ItemStack item) {
+        try {
+            @Cleanup final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            @Cleanup final BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+            dataOutput.writeObject(item);
+            return Base64Coder.encodeLines(outputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ItemStack itemStackFromBase64(String base64) {
+        try {
+            @Cleanup final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(base64));
+            @Cleanup final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+            return (ItemStack) dataInput.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
