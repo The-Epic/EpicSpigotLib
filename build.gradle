@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'me.epic'
-version '1.0.3-SNAPSHOT'
+version '1.0.4-SNAPSHOT'
 description "Epic's Spigot Lib"
 
 
@@ -31,18 +31,27 @@ shadowJar {
     archiveClassifier.set('')
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
 publishing {
     publications {
         shadow(MavenPublication) { publication ->
             project.shadow.component(publication)
+            artifacts = [shadowJar, javadocJar, sourcesJar]
+
             repositories {
                 maven {
-                    url = 'https://repo.repsy.io/mvn/the-epic/epicspigotlib'
-                    credentials {
-                        username = "the-epic"
-                        password = "$repsyPass"
-                    }
 
+
+                    credentials {
+                        username = "epic"
+                        password = "$repoSecret"
+                    }
+                    url = 'https://repo.epicebic.xyz/public/'
                 }
             }
         }
