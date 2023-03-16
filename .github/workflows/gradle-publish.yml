@@ -52,4 +52,4 @@ jobs:
       with:
         arguments: publish
       env:
-        EPICREPO_TOKEN: ${{ secrets.EPICREPO_TOKEN }}
+        EPICREPO_TOKEN: ${{ secrets.EPICREPO_SECRET }}
