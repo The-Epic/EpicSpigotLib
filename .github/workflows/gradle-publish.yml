@@ -25,7 +25,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '16'
-        distribution: 'adoptium'
+        distribution: 'adopt'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
         cache: gradle
@@ -37,7 +37,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        distribution: 'adoptium'
+        distribution: 'adopt'
         server-id: github
         settings-path: ${{ github.workspace }}
         cache: gradle
