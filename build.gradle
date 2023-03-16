@@ -49,7 +49,7 @@ publishing {
 
                     credentials {
                         username = "epic"
-                        password = "$repoSecret"
+                        password = System.getenv("EPICREPO_SECRET")
                     }
                     url = 'https://repo.epicebic.xyz/public/'
                 }
