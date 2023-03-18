@@ -13,8 +13,12 @@ compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
     mavenCentral()
+    maven{ url = "https://repo.codemc.io/repository/nms/" }
+    maven {
+        url "https://libraries.minecraft.net"
+    }
 }
 
 dependencies {
