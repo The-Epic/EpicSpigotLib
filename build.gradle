@@ -36,6 +36,8 @@ repositories {
 dependencies {
     implementation project(':epicspigotlib-core')
     implementation project(path: ':spigot-1_17_R1', configuration: 'reobf')
+    implementation project(path: ':spigot-1_18_R1', configuration: 'reobf')
+    implementation project(path: ':spigot-1_18_R2', configuration: 'reobf')
 }
 
 shadowJar {
