@@ -6,14 +6,6 @@ plugins {
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
 
 repositories {
-    //mavenLocal()
-    mavenCentral()
-    maven{
-        url = "https://repo.codemc.io/repository/nms/"
-    }
-    maven {
-        url "https://libraries.minecraft.net"
-    }
     maven {
         url = 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
     }

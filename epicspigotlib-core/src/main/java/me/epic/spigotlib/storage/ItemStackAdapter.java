@@ -15,7 +15,7 @@ public class ItemStackAdapter extends TypeAdapter<ItemStack> {
     public void write(JsonWriter out, ItemStack value) throws IOException {
         out.beginObject();
         out.name("item");
-        out.value(ItemSerializer.itemStackToBase64(value));
+        out.value(ItemSerializer.toBase64(value));
         out.endObject();
     }
 

@@ -5,7 +5,6 @@ import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;

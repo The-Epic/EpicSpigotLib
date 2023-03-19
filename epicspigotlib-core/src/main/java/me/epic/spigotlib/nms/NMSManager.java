@@ -1,9 +1,12 @@
 package me.epic.spigotlib.nms;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import me.epic.spigotlib.Version;
+import me.epic.spigotlib.utils.ClassUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
 
@@ -16,14 +19,18 @@ public class NMSManager {
 
     static {
         String version = Version.getServerNMSVersion();
+        JavaPlugin plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
 
         try {
             adapter = (INMSAdapter) Class.forName(PACKAGE + version + ".NMSAdapter").getDeclaredConstructor()
                     .newInstance();
-            Bukkit.getLogger().log(Level.INFO, "Supported server version detected: {0}", version);
+            plugin.getLogger().log(Level.INFO, "Supported server version detected: {0}", version);
         } catch (ReflectiveOperationException e) {
-            Bukkit.getLogger().log(Level.SEVERE, "Server version \"{0}\" is unsupported! Please check for updates!",
+            plugin.getLogger().log(Level.SEVERE, "Server version \"{0}\" is unsupported! Please check for updates!",
                     version);
+            Bukkit.getPluginManager().disablePlugin(plugin);
         }
     }
+
+
 }

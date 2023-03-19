@@ -10,9 +10,19 @@ import java.util.regex.Pattern;
 
 import org.bukkit.ChatColor;
 
+/**
+ * Utility class for handling and manipulating strings.
+ */
 public class StringUtils {
+
+	/**
+	 * A cache of compiled regular expression patterns for splitting strings into chunks of a certain size.
+	 */
 	private static Map<Integer, Pattern> regexCache = new HashMap<>();
 
+	/**
+	 * A mapping of integer values to their corresponding Roman numeral symbols.
+	 */
 	private static final TreeMap<Integer, String> romanMap = new TreeMap<>();
 	static {
 		romanMap.put(1000, "M");
@@ -30,6 +40,13 @@ public class StringUtils {
 		romanMap.put(1, "I");
 	}
 
+	/**
+	 * Splits a string into chunks of a specified size, ignoring any partial words at the end of the string.
+	 *
+	 * @param string the string to be split
+	 * @param size the size of each chunk
+	 * @return a list of chunks of the specified size
+	 */
 	public static List<String> splitString(String string, int size) {
 		Pattern pattern = regexCache.computeIfAbsent(size,
 				key -> Pattern.compile("(?<![^\\s]).{1," + size + "}(?![^\\s])"));
@@ -44,14 +61,15 @@ public class StringUtils {
 			result.add(next);
 			prev = next;
 		}
+
 		return result;
 	}
 
 	/**
-	 * Converts a number to roman numerals
+	 * Converts an integer to its equivalent Roman numeral representation.
 	 *
-	 * @param number to convert
-	 * @return The specified number in roman numeral
+	 * @param number the integer to be converted
+	 * @return the specified integer in Roman numeral form
 	 */
 	public static final String toRomanNumeral(int number) {
 		int l = romanMap.floorKey(number);

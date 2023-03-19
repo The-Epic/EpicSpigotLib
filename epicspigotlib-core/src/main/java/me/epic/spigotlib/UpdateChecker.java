@@ -18,11 +18,22 @@ public class UpdateChecker {
 	private final JavaPlugin plugin;
 	private final int resourceId;
 
+	/**
+	 * Create a new UpdateChecker
+	 *
+	 * @param plugin to use for logger
+	 * @param resourceId to check for new versions
+	 */
 	public UpdateChecker(JavaPlugin plugin, int resourceId) {
 		this.plugin = plugin;
 		this.resourceId = resourceId;
 	}
 
+	/**
+	 * Gets the latest plugin version
+	 *
+	 * @param consumer To run if new version is found
+	 */
 	public void getVersion(final Consumer<String> consumer) {
 		Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
 			try (InputStream inputStream = new URL(

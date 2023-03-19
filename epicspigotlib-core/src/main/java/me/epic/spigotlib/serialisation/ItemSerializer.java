@@ -20,12 +20,20 @@ public class ItemSerializer {
     /**
      * Turns an ItemStack into a Base64 String
      *
-     * @param itemStack ItemStack
+     * @param item ItemStack
      * @return ItemStack as Base64 String
      * @throws IOException exception
      */
-    public static String toBase64(final ItemStack itemStack) throws IOException {
-        return Base64.getEncoder().encodeToString(toBytes(itemStack));
+    public static String toBase64(final ItemStack item) {
+        try {
+            @Cleanup final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            @Cleanup final BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+            dataOutput.writeObject(item);
+            return Base64Coder.encodeLines(outputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -45,39 +53,18 @@ public class ItemSerializer {
     /**
      * Turns a Base64 String into an ItemStack
      *
-     * @param input Base64 String
+     * @param base64 Base64 String
      * @return ItemStack
      */
-    public static ItemStack fromBase64(final String input) {
-        return fromBytes(Base64.getDecoder().decode(input));
-    }
-
-    /**
-     * Turns a byte array into an ItemStack
-     *
-     * @param input byte array
-     * @return ItemStack
-     */
-    @SneakyThrows
-    public static ItemStack fromBytes(final byte[] input) {
-        try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(input); final BukkitObjectInputStream objectInputStream = new BukkitObjectInputStream(inputStream)) {
-            return (ItemStack) objectInputStream.readObject();
+    public static ItemStack itemStackFromBase64(String base64) {
+        try {
+            @Cleanup final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(base64));
+            @Cleanup final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+            return (ItemStack) dataInput.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
-    }
-
-    /**
-     * Converts the player inventory to a String array of Base64 strings. First string is the content and second string is the armor.
-     *
-     * @param playerInventory to turn into an array of strings.
-     * @return Array of strings: [ main content, armor content ]
-     * @throws IllegalStateException exception
-     */
-    public static String[] playerInventoryToBase64(final PlayerInventory playerInventory) {
-        //get the main content part, this doesn't return the armor
-        final String content = toBase64(playerInventory);
-        final String armor = itemStackArrayToBase64(playerInventory.getArmorContents());
-
-        return new String[]{content, armor};
     }
 
     /**
@@ -173,7 +160,6 @@ public class ItemSerializer {
     /**
      * Gets an array of ItemStacks from Base64 string.
      * <p>
-     * Base off of {@link #fromBase64(String)}.
      *
      * @param data Base64 string to convert to ItemStack array.
      * @return ItemStack array created from the Base64 string.
@@ -195,26 +181,5 @@ public class ItemSerializer {
         }
     }
 
-    public static String itemStackToBase64(final ItemStack item) {
-        try {
-            @Cleanup final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            @Cleanup final BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
-            dataOutput.writeObject(item);
-            return Base64Coder.encodeLines(outputStream.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
-    public static ItemStack itemStackFromBase64(String base64) {
-        try {
-            @Cleanup final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(base64));
-            @Cleanup final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
-            return (ItemStack) dataInput.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

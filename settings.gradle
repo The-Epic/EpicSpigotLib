@@ -1,4 +1,4 @@
 rootProject.name = 'epicspigotlib'
 include 'epicspigotlib-core'
 include 'spigot-1_17_R1'
-
+include 'spigot-1_18_R1'

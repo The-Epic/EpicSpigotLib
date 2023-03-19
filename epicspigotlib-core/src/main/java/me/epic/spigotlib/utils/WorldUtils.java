@@ -7,14 +7,27 @@ import org.bukkit.World;
 
 import java.util.Objects;
 
+/**
+ * The WorldUtils class provides utility methods for interacting with game worlds.
+ */
 public class WorldUtils {
 
-    public static World getDefaultWorld() {
-        return Objects.requireNonNull(Bukkit.getWorld(getDefaultWorldName()));
+    /**
+     * Returns the default world instance.
+     *
+     * @return the default world instance
+     * @throws NullPointerException if the default world is null
+     */
+    public static World getDefaultWorld() throws NullPointerException {
+        return Objects.requireNonNull(Bukkit.getWorld(getDefaultWorldName()), "Default world is null");
     }
 
+    /**
+     * Returns the default world name.
+     *
+     * @return the default world name
+     */
     public static String getDefaultWorldName() {
         return NMSManager.getAdapter().getDefaultWorldName();
     }
-
 }

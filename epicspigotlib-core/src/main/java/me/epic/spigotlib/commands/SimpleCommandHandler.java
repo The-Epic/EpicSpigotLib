@@ -28,14 +28,10 @@ public abstract class SimpleCommandHandler implements CommandExecutor, TabComple
 	 * @return StringList
 	 */
 	@Override
-	public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-		return Collections.emptyList();
-	}
+	public abstract List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args);
 
 	@Override
-	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
-		return false;
-	}
+	public abstract boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args);
 
 	/**
 	 * Gets the permission for the command

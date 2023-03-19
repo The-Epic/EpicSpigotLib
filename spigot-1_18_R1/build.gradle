@@ -5,11 +5,11 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(16)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
 dependencies {
     implementation project(":epicspigotlib-core")
-    paperweightDevelopmentBundle('io.papermc.paper:dev-bundle:1.17.1-R0.1-SNAPSHOT')
+    paperweightDevelopmentBundle('io.papermc.paper:dev-bundle:1.18.1-R0.1-SNAPSHOT')
 }
