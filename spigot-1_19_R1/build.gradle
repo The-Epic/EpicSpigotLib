@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'io.papermc.paperweight.userdev' version '1.5.3'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+dependencies {
+    implementation project(":epicspigotlib-core")
+    paperweightDevelopmentBundle('io.papermc.paper:dev-bundle:1.19.2-R0.1-SNAPSHOT')
+}

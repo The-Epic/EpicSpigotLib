@@ -1,5 +1,6 @@
 package me.epic.spigotlib.utils;
 
+import me.epic.spigotlib.internal.annotations.NMS;
 import me.epic.spigotlib.nms.NMSManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -27,6 +28,7 @@ public class WorldUtils {
      *
      * @return the default world name
      */
+    @NMS
     public static String getDefaultWorldName() {
         return NMSManager.getAdapter().getDefaultWorldName();
     }

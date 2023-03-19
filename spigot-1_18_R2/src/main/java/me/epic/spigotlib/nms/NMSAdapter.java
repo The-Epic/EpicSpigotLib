@@ -17,7 +17,7 @@ public class NMSAdapter implements INMSAdapter {
 
     @Override
     public void setTexture(SkullMeta meta, String texture) {
-        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.nameUUIDFromBytes(texture.getBytes()));
+        PlayerProfile profile = Bukkit.createProfile(UUID.nameUUIDFromBytes(texture.getBytes()));
         PlayerTextures textures = profile.getTextures();
         try {
             textures.setSkin(new URL(TEXTURE_URL + texture));

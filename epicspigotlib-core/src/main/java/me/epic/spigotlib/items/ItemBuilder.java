@@ -125,6 +125,7 @@ public class ItemBuilder {
 		return this;
 	}
 
+	@NMS
 	public ItemBuilder skullTexture(String texture) {
 		if (!(this.meta instanceof SkullMeta skullMeta))
 			return this;
@@ -134,7 +135,6 @@ public class ItemBuilder {
 	}
 
 
-	@NMS
 	public ItemBuilder skullTexture(Player player) {
 		if (!(this.meta instanceof SkullMeta)) return this;
 		((SkullMeta)this.meta).setOwningPlayer(player);
