@@ -18,6 +18,7 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask tenSecondDelay(Runnable runnable ) {
+        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 10);
     }
 
@@ -27,6 +28,7 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask thirtySecondDelay(Runnable runnable ) {
+        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 30);
     }
 
@@ -36,6 +38,7 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask oneMinuteDelay(Runnable runnable ) {
+        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 60);
     }
 
@@ -45,12 +48,12 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask oneTickDelay(Runnable runnable) {
+        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 1);
     }
 
-    private static void setPlugin(JavaPlugin plugin) {
-        if (plugin == null) plugin = EpicSpigotLib.getPlugin();
-        SchedulerUtils.plugin = plugin;
+    private static void initPlugin() {
+        if (plugin == null) plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
     }
 
 }
