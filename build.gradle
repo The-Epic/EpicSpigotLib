@@ -25,6 +25,16 @@ subprojects {
 }
 
 
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
+    }
+    maven {
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+}
+
 dependencies {
     implementation project(':epicspigotlib-core')
     implementation project(path: ':spigot-1_17_R1', configuration: 'reobf')
