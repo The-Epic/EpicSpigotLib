@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
  */
 public class SchedulerUtils {
 
-    private static JavaPlugin plugin; // the plugin instance to use for scheduling tasks
+    private static JavaPlugin plugin = EpicSpigotLib.getPlugin(); // the plugin instance to use for scheduling tasks
 
     /**
      * Schedules a task to run after a delay of 10 seconds.
@@ -18,7 +18,6 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask tenSecondDelay(Runnable runnable ) {
-        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 10);
     }
 
@@ -28,7 +27,6 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask thirtySecondDelay(Runnable runnable ) {
-        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 30);
     }
 
@@ -38,7 +36,6 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask oneMinuteDelay(Runnable runnable ) {
-        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 20 * 60);
     }
 
@@ -48,12 +45,8 @@ public class SchedulerUtils {
      * @return A BukkitTask representing the scheduled task.
      */
     public static BukkitTask oneTickDelay(Runnable runnable) {
-        initPlugin();
         return plugin.getServer().getScheduler().runTaskLater(plugin, runnable, 1);
     }
 
-    private static void initPlugin() {
-        if (plugin == null) plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
-    }
 
 }

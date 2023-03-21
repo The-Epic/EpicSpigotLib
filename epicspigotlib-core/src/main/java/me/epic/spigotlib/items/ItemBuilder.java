@@ -1,18 +1,14 @@
 package me.epic.spigotlib.items;
 
-import java.lang.reflect.Field;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
+import java.util.function.Consumer;
 
 //import com.mojang.authlib.GameProfile;
 //import com.mojang.authlib.properties.Property;
 //import com.mojang.authlib.properties.PropertyMap;
-import me.epic.spigotlib.Version;
 import me.epic.spigotlib.formatting.Formatting;
 import me.epic.spigotlib.internal.annotations.NMS;
 import me.epic.spigotlib.nms.NMSManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -27,6 +23,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -78,8 +75,8 @@ public class ItemBuilder {
 	}
 
 	public ItemBuilder enchantments(Map<Enchantment, Integer> enchantmentAndLevel) {
-		for (Map.Entry entry : enchantmentAndLevel.entrySet()) {
-			this.meta.addEnchant((Enchantment)entry.getKey(),(Integer) entry.getValue(),true);
+		for (Map.Entry<Enchantment, Integer> entry : enchantmentAndLevel.entrySet()) {
+			this.meta.addEnchant(entry.getKey(), entry.getValue(),true);
 		}
 		return this;
 	}
@@ -187,11 +184,40 @@ public class ItemBuilder {
 		return this;
 	}
 
+	public ItemBuilder potionEffects(PotionEffect... effects) {
+		if (!(this.meta instanceof PotionMeta potionMeta))
+			return this;
+
+		for (PotionEffect effect : effects) {
+			potionMeta.addCustomEffect(effect, true);
+		}
+
+		return this;
+	}
+
+	public ItemBuilder persistentData(PersistentDataHolder... data) {
+		PersistentDataContainer persistentDataContainer = this.meta.getPersistentDataContainer();
+		for (PersistentDataHolder persistentData : data) {
+			persistentDataContainer.set(persistentData.key(), persistentData.type(), persistentData.value());
+		}
+
+		return this;
+	}
+
 	public ItemStack build() {
 		ItemStack finalItem = this.item;
 		finalItem.setItemMeta(this.meta);
 
 		return finalItem;
+	}
+
+	public <T extends ItemMeta> ItemBuilder modify(Class<T> metaType, Consumer<T> action) {
+		if (!metaType.isAssignableFrom(meta.getClass())) {
+			return this;
+		}
+
+		action.accept(metaType.cast(meta));
+		return this;
 	}
 
 	private List<String> getLore() {
