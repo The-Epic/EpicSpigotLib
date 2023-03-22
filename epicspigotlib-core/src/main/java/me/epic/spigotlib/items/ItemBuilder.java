@@ -195,14 +195,6 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder persistentData(PersistentDataHolder... data) {
-		PersistentDataContainer persistentDataContainer = this.meta.getPersistentDataContainer();
-		for (PersistentDataHolder persistentData : data) {
-			persistentDataContainer.set(persistentData.key(), persistentData.type(), persistentData.value());
-		}
-
-		return this;
-	}
 
 	public ItemStack build() {
 		ItemStack finalItem = this.item;
