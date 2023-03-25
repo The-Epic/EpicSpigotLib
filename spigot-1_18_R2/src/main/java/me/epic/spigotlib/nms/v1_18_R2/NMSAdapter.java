@@ -1,6 +1,7 @@
-package me.epic.spigotlib.nms;
+package me.epic.spigotlib.nms.v1_18_R2;
 
 import com.mojang.authlib.GameProfile;
+import me.epic.spigotlib.nms.INMSAdapter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
