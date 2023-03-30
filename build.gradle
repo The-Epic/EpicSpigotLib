@@ -75,8 +75,6 @@ publishing {
 
             repositories {
                 maven {
-
-
                     credentials {
                         username = "epic"
                         password = System.getenv("EPICREPO_SECRET")
