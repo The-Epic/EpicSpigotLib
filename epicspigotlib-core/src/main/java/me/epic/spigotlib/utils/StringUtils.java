@@ -1,14 +1,10 @@
 package me.epic.spigotlib.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import org.bukkit.ChatColor;
+
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.bukkit.ChatColor;
 
 /**
  * Utility class for handling and manipulating strings.
@@ -77,5 +73,27 @@ public class StringUtils {
 			return romanMap.get(number);
 		}
 		return romanMap.get(l) + toRomanNumeral(number - l);
+	}
+
+	/**
+	 * Scrambles word(s)
+	 *
+	 * @param word or words to scramble
+	 * @return Scrambled word or words
+	 */
+	public static String scrambleWord(String word) {
+		String[] words = word.split(" ");
+		StringBuilder builder = new StringBuilder(word.length());
+
+		for (String wrd : words) {
+			List<Character> characters = new ArrayList<>(wrd.chars().mapToObj(i -> (char) i).toList());
+			Collections.shuffle(characters);
+
+			for (char character : characters) {
+				builder.append(character);
+			}
+			builder.append(' ');
+		}
+		return builder.toString().trim();
 	}
 }
