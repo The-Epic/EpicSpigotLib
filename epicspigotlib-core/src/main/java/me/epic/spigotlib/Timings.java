@@ -67,7 +67,7 @@ public class Timings {
      * @param identifier Name of the task to be ended
      * @param plugin Plugin to log messages under
      * @param player Player to send messages to
-     * @returnmillis Long formatted
+     * @return millis Long formatted
      */
     public static long endTimings(@NotNull String identifier, @Nullable Plugin plugin, @Nullable Player player) {
         Long now = System.currentTimeMillis();

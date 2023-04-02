@@ -1,11 +1,9 @@
 package me.epic.spigotlib.serialisation;
 
 import lombok.Cleanup;
-import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
@@ -14,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
-import java.util.Base64;
 
 public class ItemSerializer {
     /**
@@ -22,7 +19,6 @@ public class ItemSerializer {
      *
      * @param item ItemStack
      * @return ItemStack as Base64 String
-     * @throws IOException exception
      */
     public static String toBase64(final ItemStack item) {
         try {

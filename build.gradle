@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "com.github.johnrengelman.shadow" version "7.1.0"
+    id "io.freefair.aggregate-javadoc" version "6.5.0.3"
 }
 
 group 'me.epic'
@@ -13,6 +14,7 @@ compileTestJava.options.encoding = "UTF-8"
 jar.enabled = false
 
 subprojects {
+    apply plugin: 'maven-publish'
     repositories {
         maven {
             url = 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
@@ -21,6 +23,27 @@ subprojects {
             url = "https://repo.papermc.io/repository/maven-public/"
         }
     }
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+    def javadocConfig = {
+        options {
+            links(
+                    'https://docs.oracle.com/en/java/javase/16/docs/api/',
+                    'https://hub.spigotmc.org/javadocs/spigot/',
+                    'https://javadoc.io/doc/org.jetbrains/annotations/latest'
+            )
+            tags(
+                    "nms:a:Requires NMS:"
+            )
+        }
+    }
+
+    javadoc { configure javadocConfig }
+    aggregateJavadoc { configure javadocConfig }
 }
 
 
@@ -49,15 +72,6 @@ shadowJar {
     relocate 'com.jeff_media.morepersistentdatatypes', 'me.epic.morepersistentdatatypes'
 }
 
-javadoc {
-    options.links(
-            'https://docs.oracle.com/en/java/javase/16/docs/api/',
-            'https://hub.spigotmc.org/javadocs/spigot/',
-            'https://javadoc.io/doc/org.jetbrains/annotations/latest'
-    )
-    options.tags (
-            "nms:a:Requires NMS"
-    )
-}
+
 
 apply from: 'https://raw.githubusercontent.com/The-Epic/gradle-scripts/main/publishing.gradle'
