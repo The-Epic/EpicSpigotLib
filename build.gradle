@@ -2,11 +2,12 @@ plugins {
     id 'java'
     id "com.github.johnrengelman.shadow" version "7.1.0"
     id "io.freefair.aggregate-javadoc" version "6.5.0.3"
+    id "io.freefair.aggregate-javadoc-jar" version "6.6.3"
     id 'maven-publish'
 }
 
 group 'me.epic'
-version '1.1.5-SNAPSHOT'
+version '1.1.6-SNAPSHOT'
 description "Epic's Spigot Lib"
 
 compileJava.options.encoding = "UTF-8"
@@ -15,14 +16,6 @@ compileTestJava.options.encoding = "UTF-8"
 jar.enabled = false
 
 subprojects {
-    repositories {
-        maven {
-            url = 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
-        }
-        maven {
-            url = "https://repo.papermc.io/repository/maven-public/"
-        }
-    }
 
     java {
         withJavadocJar()
@@ -30,7 +23,7 @@ subprojects {
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
+        archiveClassifier.set('javadoc')
         from javadoc.destinationDir
     }
 
@@ -39,10 +32,10 @@ subprojects {
             links(
                     'https://docs.oracle.com/en/java/javase/16/docs/api/',
                     'https://hub.spigotmc.org/javadocs/spigot/',
-                    'https://javadoc.io/doc/org.jetbrains/annotations/latest'
+                    'https://javadoc.io/doc/org.jetbrains/annotations/19.0.0'
             )
             tags(
-                    "nms:a:Requires NMS:"
+                    "nms:a:Requires NMS"
             )
         }
     }
@@ -51,14 +44,15 @@ subprojects {
     aggregateJavadoc { configure javadocConfig }
 }
 
-
-repositories {
-    mavenCentral()
-    maven {
-        url = 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
-    }
-    maven {
-        url = "https://repo.papermc.io/repository/maven-public/"
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url = 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
+        }
+        maven {
+            url = "https://repo.papermc.io/repository/maven-public/"
+        }
     }
 }
 
@@ -81,7 +75,7 @@ publishing {
     publications {
         shadow(MavenPublication) { publication ->
             project.shadow.component(publication)
-            artifacts = [shadowJar, javadocJar, sourcesJar]
+            artifacts = [shadowJar, aggregateJavadocJar]
 
             repositories {
                 maven {
@@ -95,7 +89,3 @@ publishing {
         }
     }
 }
-
-
-
-//apply from: 'https://raw.githubusercontent.com/The-Epic/gradle-scripts/main/publishing.gradle'

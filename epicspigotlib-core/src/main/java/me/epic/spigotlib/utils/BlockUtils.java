@@ -72,6 +72,7 @@ public class BlockUtils {
     /**
      * @throws IllegalArgumentException when the block is not a skull
      * @deprecated see {@link #setHeadTexture(Block, String)}
+     * @nms
      */
     @Deprecated
     @NMS
@@ -83,6 +84,7 @@ public class BlockUtils {
      * Sets the texture of a placed head to the given base64 skin
      *
      * @throws IllegalArgumentException when the block is not a skull
+     * @nms
      */
     @NMS
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final String base64) {
@@ -95,6 +97,7 @@ public class BlockUtils {
      * Sets the texture of a placed head to the skin of the given GameProfile
      *
      * @throws IllegalArgumentException when the block is not a skull
+     * @nms
      */
     @NMS
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
