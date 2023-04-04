@@ -19,7 +19,6 @@ subprojects {
 
     java {
         withJavadocJar()
-        withSourcesJar()
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
