@@ -12,7 +12,7 @@ plugins {
 
 repositories {
   maven {
-    url = 'https://repo.epicebic.xyz/'
+    url = 'https://repo.epicebic.xyz/public'
   }
 }
 
