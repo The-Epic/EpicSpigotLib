@@ -35,4 +35,29 @@ public class PlayerUtils {
         }
         return player.getCustomName();
     }
+
+    /**
+     * Retrieves a player by their name. If Essentials is enabled, this method will prioritize Essentials players.
+     *
+     * @param name The name of the player to retrieve.
+     * @return The Player object for the given name, or null if the player could not be found.
+     */
+    public static Player getPlayer(String name) {
+        return getPlayer(name, true);
+    }
+
+    /**
+     * Retrieves a player by their name.
+     *
+     * @param name The name of the player to retrieve.
+     * @param essentials Whether to prioritize Essentials players if Essentials is enabled.
+     * @return The Player object for the given name, or null if the player could not be found.
+     */
+    public static Player getPlayer(String name, boolean essentials) {
+        if (essentials && essentialsPlugin != null) {
+            User user = essentialsPlugin.getUserMap().getUser(name);
+            return user.getBase();
+        }
+        return Bukkit.getPlayer(name);
+    }
 }
