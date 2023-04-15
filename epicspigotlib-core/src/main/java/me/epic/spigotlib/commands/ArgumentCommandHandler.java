@@ -80,7 +80,7 @@ public class ArgumentCommandHandler extends SimpleCommandHandler {
 			if (this.defaultExecutor != null) {
 				return this.defaultExecutor.handleTabCompletion(sender, args);
 			} else {
-				return handleTabCompletion(sender, new String[]{""});
+				return Collections.emptyList();
 			}
 		} else if (args.length == 1) {
 			List<String> suggestions = new ArrayList<>(this.subcommands.keySet());
