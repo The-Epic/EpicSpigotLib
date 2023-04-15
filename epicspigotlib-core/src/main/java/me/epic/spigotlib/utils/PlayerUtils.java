@@ -12,7 +12,6 @@ public class PlayerUtils {
 
     static {
         Bukkit.getScheduler().runTask(EpicSpigotLib.getPlugin(), () -> {
-            System.out.println(Bukkit.getPluginManager().isPluginEnabled("Essentials"));
             if (Bukkit.getPluginManager().isPluginEnabled("Essentials")) essentialsPlugin = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         });
     }
