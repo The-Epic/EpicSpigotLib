@@ -2,6 +2,8 @@ package me.epic.spigotlib.utils;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
+import lombok.SneakyThrows;
+import me.epic.spigotlib.EpicSpigotLib;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -9,7 +11,10 @@ public class PlayerUtils {
     private static Essentials essentialsPlugin = null;
 
     static {
-        if (Bukkit.getPluginManager().isPluginEnabled("Essentials")) essentialsPlugin = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
+        Bukkit.getScheduler().runTask(EpicSpigotLib.getPlugin(), () -> {
+            System.out.println(Bukkit.getPluginManager().isPluginEnabled("Essentials"));
+            if (Bukkit.getPluginManager().isPluginEnabled("Essentials")) essentialsPlugin = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
+        });
     }
 
     /**
@@ -31,7 +36,12 @@ public class PlayerUtils {
     public static String getNickname(Player player, boolean essentials) {
         if (essentials && essentialsPlugin != null) {
             User user = essentialsPlugin.getUser(player);
-            return user.getNickname();
+            if (user == null) {
+                return player.getName();
+            } else {
+                String nick = user.getNickname();
+                return nick == null ? player.getName() : nick;
+            }
         }
         return player.getCustomName();
     }
@@ -53,10 +63,10 @@ public class PlayerUtils {
      * @param essentials Whether to prioritize Essentials players if Essentials is enabled.
      * @return The Player object for the given name, or null if the player could not be found.
      */
+    @SneakyThrows
     public static Player getPlayer(String name, boolean essentials) {
         if (essentials && essentialsPlugin != null) {
-            User user = essentialsPlugin.getUserMap().getUser(name);
-            return user.getBase();
+            return essentialsPlugin.matchUser(Bukkit.getServer(), null, name, false, false).getBase();
         }
         return Bukkit.getPlayer(name);
     }
