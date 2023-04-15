@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.util.StringUtil;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * A command handler that handles subcommands based on the first argument provided.
@@ -77,23 +76,22 @@ public class ArgumentCommandHandler extends SimpleCommandHandler {
 	 * @return a list of suggestions for tab completion
 	 */
 	public List<String> handleTabCompletion(CommandSender sender, String[] args) {
-		if (args.length == 1) {
-			List<String> suggestions = new ArrayList<>();
-			List<String> validSubcommands = new ArrayList<>();
-
-			for (Entry<String, SimpleCommandHandler> entry : this.subcommands.entrySet()) {
-				if (sender.hasPermission(entry.getValue().getPermission()))
-					validSubcommands.add(entry.getKey());
+		if (args.length == 0) {
+			if (this.defaultExecutor != null) {
+				return this.defaultExecutor.handleTabCompletion(sender, args);
+			} else {
+				return handleTabCompletion(sender, new String[]{""});
 			}
-
-			StringUtil.copyPartialMatches(args[0], validSubcommands, suggestions);
-			return suggestions;
-		} else if (args.length > 1) {
+		} else if (args.length == 1) {
+			List<String> suggestions = new ArrayList<>(this.subcommands.keySet());
+			return StringUtil.copyPartialMatches(args[0], suggestions, new ArrayList<>());
+		} else {
 			SimpleCommandHandler executor = this.subcommands.get(args[0]);
-			if (executor != null)
-				return executor.handleTabCompletion(sender, Arrays.copyOfRange(args, 1, args.length + 1));
+			if (executor != null) {
+				return executor.handleTabCompletion(sender, Arrays.copyOfRange(args, 1, args.length));
+			}
+			return Collections.emptyList();
 		}
-		return Collections.emptyList();
 	}
 
 	private void sendUsage(CommandSender sender, String arg) {
