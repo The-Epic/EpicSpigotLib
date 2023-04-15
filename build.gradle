@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'me.epic'
-version '1.1.7-SNAPSHOT'
+version '1.2.0-SNAPSHOT'
 description "Epic's Spigot Lib"
 
 compileJava.options.encoding = "UTF-8"
@@ -21,10 +21,12 @@ subprojects {
         withJavadocJar()
     }
 
-    task javadocJar(type: Jar, dependsOn: javadoc) {
+    tasks.register('javadocJar', Jar) {
+        dependsOn javadoc
         archiveClassifier.set('javadoc')
         from javadoc.destinationDir
     }
+
 
     def javadocConfig = {
         options {
@@ -38,6 +40,8 @@ subprojects {
             )
         }
     }
+
+    javadoc.options.addStringOption('Xdoclint:none', '-quiet')
 
     javadoc { configure javadocConfig }
     aggregateJavadoc { configure javadocConfig }
@@ -69,22 +73,22 @@ shadowJar {
     archiveClassifier.set('')
     relocate 'com.jeff_media.morepersistentdatatypes', 'me.epic.morepersistentdatatypes'
 }
+javadoc.options.addStringOption('Xdoclint:none', '-quiet')
 
 publishing {
     publications {
         shadow(MavenPublication) { publication ->
             project.shadow.component(publication)
-            artifacts = [shadowJar, aggregateJavadocJar]
-
-            repositories {
-                maven {
-                    credentials {
-                        username = "epic"
-                        password = System.getenv("EPICREPO_SECRET")
-                    }
-                    url = 'https://repo.epicebic.xyz/public/'
-                }
+            publication.artifact(aggregateJavadocJar)
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username = "epic"
+                password = System.getenv("EPICREPO_SECRET")
             }
+            url = 'https://repo.epicebic.xyz/public/'
         }
     }
 }
