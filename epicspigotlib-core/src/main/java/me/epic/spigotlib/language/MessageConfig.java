@@ -1,5 +1,7 @@
 package me.epic.spigotlib.language;
 
+import me.epic.spigotlib.EpicSpigotLib;
+import me.epic.spigotlib.config.ConfigUpdater;
 import me.epic.spigotlib.formatting.Formatting;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -27,6 +29,7 @@ public class MessageConfig {
      */
     public MessageConfig(File file) {
         this.file = file;
+        ConfigUpdater.update(EpicSpigotLib.getPlugin(), "messages.yml", file);
         this.configuration = YamlConfiguration.loadConfiguration(file);
     }
 
