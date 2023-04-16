@@ -5,6 +5,7 @@ import com.earth2me.essentials.User;
 import lombok.SneakyThrows;
 import me.epic.spigotlib.EpicSpigotLib;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class PlayerUtils {
@@ -68,5 +69,60 @@ public class PlayerUtils {
             return essentialsPlugin.matchUser(Bukkit.getServer(), null, name, false, false).getBase();
         }
         return Bukkit.getPlayer(name);
+    }
+
+    /**
+     * Returns the nickname of an offline player.
+     *
+     * @param player the player to get the nickname of
+     * @return the nickname of the player, or their name if they have no nickname
+     */
+    public static String getOfflineNickname(OfflinePlayer player) {
+        return getOfflineNickname(player, true);
+    }
+
+    /**
+     * Returns the nickname of an offline player.
+     *
+     * @param player the player to get the nickname of
+     * @param essentials whether to use Essentials to get the nickname
+     * @return the nickname of the player, or their name if they have no nickname
+     */
+    public static String getOfflineNickname(OfflinePlayer player, boolean essentials) {
+        if (essentials && essentialsPlugin != null) {
+            User user = essentialsPlugin.getOfflineUser(player.getName());
+            if (user == null) {
+                return player.getName();
+            } else {
+                String nick = user.getNickname();
+                return nick == null ? player.getName() : nick;
+            }
+        }
+        return player.getName();
+    }
+
+    /**
+     * Returns an offline player by name.
+     *
+     * @param name the name of the player to get
+     * @return the player with the given name
+     */
+    public static OfflinePlayer getOfflinePlayer(String name) {
+        return getOfflinePlayer(name, true);
+    }
+
+    /**
+     * Returns an offline player by name.
+     *
+     * @param name the name of the player to get
+     * @param essentials whether to use Essentials to get the player
+     * @return the player with the given name
+     */
+    @SneakyThrows
+    public static OfflinePlayer getOfflinePlayer(String name, boolean essentials) {
+        if (essentials && essentialsPlugin != null) {
+            return Bukkit.getOfflinePlayer(essentialsPlugin.matchUser(Bukkit.getServer(), null, name, false, false).getUUID());
+        }
+        return Bukkit.getOfflinePlayer(name);
     }
 }
