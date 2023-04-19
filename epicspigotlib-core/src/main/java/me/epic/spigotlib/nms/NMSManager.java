@@ -1,11 +1,9 @@
 package me.epic.spigotlib.nms;
 
 import lombok.Getter;
-import lombok.SneakyThrows;
 import me.epic.spigotlib.Version;
 import me.epic.spigotlib.utils.ClassUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -19,6 +17,7 @@ public class NMSManager {
 
     static {
         String version = Version.getServerNMSVersion();
+        System.out.println(version);
         JavaPlugin plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
 
         try {

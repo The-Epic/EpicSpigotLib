@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.util.UUID;
 
+@Deprecated(forRemoval = true)
 public class NMSAdapter implements INMSAdapter {
     @Override
     public void setTexture(SkullMeta meta, String texture) {
