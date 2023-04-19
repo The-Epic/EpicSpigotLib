@@ -37,6 +37,10 @@ public class ItemBuilder {
 	private ItemBuilder() {
 	}
 
+	public ItemBuilder(Material material) {
+		this(material, 1);
+	}
+
 	/**
 	 * Constructs a new ItemBuilder with the given material and amount.
 	 *
