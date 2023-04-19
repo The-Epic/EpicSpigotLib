@@ -17,7 +17,6 @@ public class NMSManager {
 
     static {
         String version = Version.getServerNMSVersion();
-        System.out.println(version);
         JavaPlugin plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
 
         try {
