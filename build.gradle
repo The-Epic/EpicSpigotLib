@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'me.epic'
-version '1.2.3-SNAPSHOT'
+version '1.2.4-SNAPSHOT'
 description "Epic's Spigot Lib"
 
 compileJava.options.encoding = "UTF-8"
@@ -38,10 +38,10 @@ subprojects {
             tags(
                     "nms:a:Requires NMS"
             )
+            addStringOption('Xdoclint:none', '-quiet')
         }
     }
 
-    javadoc.options.addStringOption('Xdoclint:none', '-quiet')
 
     javadoc { configure javadocConfig }
     aggregateJavadoc { configure javadocConfig }

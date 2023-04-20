@@ -39,7 +39,7 @@ import java.util.function.Consumer;
  * <p>This class provides methods for adding and removing buttons from the inventory, adding event
  * handlers for when the inventory is clicked or closed, and adding or removing items from the inventory.</p>
  */
-public class CustomInventory {
+public abstract class CustomInventory {
 
 	private Map<Integer, Consumer<InventoryClickEvent>> buttons = new HashMap<>();
 	private List<Consumer<InventoryClickEvent>> clickActions = new ArrayList<>();
@@ -178,4 +178,6 @@ public class CustomInventory {
 				", inventory=" + inventory +
 				'}';
 	}
+
+	public abstract void reload();
 }
