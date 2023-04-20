@@ -3,7 +3,6 @@ package me.epic.spigotlib.items;
 import me.epic.spigotlib.formatting.Formatting;
 import me.epic.spigotlib.internal.annotations.NMS;
 import me.epic.spigotlib.nms.NMSManager;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -149,7 +148,7 @@ public class ItemBuilder {
 	 */
 	public ItemBuilder lore(List<String> lore) {
 		List<String> itemLore = getLore();
-		lore = lore.stream().map(line -> Formatting.translate(line)).toList();
+		lore = lore.stream().map(Formatting::translate).toList();
 		itemLore.addAll(lore);
 
 		meta.setLore(itemLore);
@@ -163,13 +162,7 @@ public class ItemBuilder {
 	 * @return The ItemBuilder instance.
 	 */
 	public ItemBuilder lore(String... lore) {
-		List<String> itemLore = getLore();
-		List<String> loreList = Arrays.stream(lore).map(line -> ChatColor.translateAlternateColorCodes('&', line))
-				.toList();
-		itemLore.addAll(loreList);
-
-		meta.setLore(itemLore);
-
+		lore(Arrays.stream(lore).toList());
 		return this;
 	}
 
@@ -329,6 +322,7 @@ public class ItemBuilder {
 
 		return finalItem;
 	}
+
 	/**
 	 * Modifies the ItemMeta of the item using the specified Consumer.
 	 *

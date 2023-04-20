@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'me.epic'
-version '1.2.2-SNAPSHOT'
+version '1.2.3-SNAPSHOT'
 description "Epic's Spigot Lib"
 
 compileJava.options.encoding = "UTF-8"

@@ -16,6 +16,11 @@ public class NMSManager {
 
 
     static {
+        init();
+    }
+
+    public static void init() {
+        if (adapter != null) return;
         String version = Version.getServerNMSVersion();
         JavaPlugin plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
 
