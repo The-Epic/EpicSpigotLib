@@ -3,6 +3,7 @@ package me.epic.spigotlib.items;
 import me.epic.spigotlib.formatting.Formatting;
 import me.epic.spigotlib.internal.annotations.NMS;
 import me.epic.spigotlib.nms.NMSManager;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -138,6 +139,18 @@ public class ItemBuilder {
 	public ItemBuilder name(String name) {
 		this.meta.setDisplayName(Formatting.translate(name));
 
+		return this;
+	}
+
+	@NMS
+	public ItemBuilder loreComponents(BaseComponent[]... components) {
+		loreComponents(Arrays.stream(components).toList());
+		return this;
+	}
+
+	@NMS
+	public ItemBuilder loreComponents(List<BaseComponent[]> components) {
+		this.meta = NMSManager.getAdapter().addLore(item, components);
 		return this;
 	}
 

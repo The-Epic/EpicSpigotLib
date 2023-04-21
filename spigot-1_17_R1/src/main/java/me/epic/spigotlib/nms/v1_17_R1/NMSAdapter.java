@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import me.epic.spigotlib.nms.INMSAdapter;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -11,10 +12,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.UUID;
 
 @Deprecated(forRemoval = true)
@@ -47,5 +51,10 @@ public class NMSAdapter implements INMSAdapter {
         final SkullBlockEntity skull = (SkullBlockEntity) world.getBlockEntity(blockPosition);
         assert skull != null;
         skull.setOwner(gameProfile);
+    }
+
+    @Override
+    public ItemMeta addLore(ItemStack item, List<BaseComponent[]> components) {
+        throw new UnsupportedOperationException("1.17 isnt supported anymore.");
     }
 }
