@@ -4,12 +4,13 @@ import me.epic.spigotlib.language.MessageConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 /**
  * A command handler that handles subcommands based on the first argument provided.
- * Each subcommand should be associated with a separate {@link SimpleCommandHandler}.
+ * Each subcommand should be associated with a separate {@link me.epic.spigotlib.commands.SimpleCommandHandler}.
  */
 public class ArgumentCommandHandler extends SimpleCommandHandler {
 	private final Map<String, SimpleCommandHandler> subcommands = new HashMap<>();
@@ -22,19 +23,19 @@ public class ArgumentCommandHandler extends SimpleCommandHandler {
 	 * @param messageConfig the configuration for messages sent by this command handler
 	 * @param permission the permission required to execute this command handler
 	 */
-	public ArgumentCommandHandler(MessageConfig messageConfig, String permission) {
-		super(permission);
+	public ArgumentCommandHandler(MessageConfig messageConfig, String permission, String noPermissionMessage) {
+		super(permission, noPermissionMessage);
 		this.messageConfig = messageConfig;
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
 		handleCommand(sender, args);
 		return true;
 	}
 
 	@Override
-	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+	public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
 		return handleTabCompletion(sender, args);
 	}
 

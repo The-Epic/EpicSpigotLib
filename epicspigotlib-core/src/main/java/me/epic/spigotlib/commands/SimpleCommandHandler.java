@@ -1,6 +1,7 @@
 package me.epic.spigotlib.commands;
 
 import lombok.Getter;
+import me.epic.spigotlib.formatting.Formatting;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -17,14 +18,18 @@ public abstract class SimpleCommandHandler implements TabExecutor {
 
 	@Getter
 	private final String permission;
+	@Getter
+	private final String noPermissionMessage;
 
 	/**
 	 * Constructs a new SimpleCommandHandler with the given permission.
 	 *
 	 * @param permission the permission required to execute this command handler
+	 * @param noPermissionMessage The message to send if the user doesnt have permission, will send plugin.yml message if null
 	 */
-	public SimpleCommandHandler(String permission) {
+	public SimpleCommandHandler(String permission, String noPermissionMessage) {
 		this.permission = permission;
+		this.noPermissionMessage = noPermissionMessage == null ? null : Formatting.translate(noPermissionMessage);
 	}
 
 	/**
@@ -53,6 +58,12 @@ public abstract class SimpleCommandHandler implements TabExecutor {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+		if (!sender.hasPermission(permission)) {
+			String message = (noPermissionMessage != null) ? noPermissionMessage : (command.getPermissionMessage() != null) ? command.getPermissionMessage() : "No permission.";
+			sender.sendMessage(message);
+			return true;
+		}
+
 		handleCommand(sender, args);
 		return true;
 	}
