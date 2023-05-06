@@ -73,7 +73,6 @@ shadowJar {
     archiveClassifier.set('')
     relocate 'com.jeff_media.morepersistentdatatypes', 'me.epic.morepersistentdatatypes'
 }
-javadoc.options.addStringOption('Xdoclint:none', '-quiet')
 
 publishing {
     publications {
