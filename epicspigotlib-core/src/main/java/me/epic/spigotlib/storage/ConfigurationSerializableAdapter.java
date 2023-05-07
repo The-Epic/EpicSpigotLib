@@ -2,6 +2,7 @@ package me.epic.spigotlib.storage;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import me.epic.spigotlib.serialisation.ItemSerializer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 
@@ -9,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ItemStackAdapter implements JsonSerializer<ConfigurationSerializable>, JsonDeserializer<ConfigurationSerializable> {
+public class ConfigurationSerializableAdapter implements JsonSerializer<ConfigurationSerializable>, JsonDeserializer<ConfigurationSerializable> {
 //    @Override
 //    public void write(JsonWriter out, ItemStack value) throws IOException {
 //        out.beginObject();
@@ -32,6 +33,13 @@ public class ItemStackAdapter implements JsonSerializer<ConfigurationSerializabl
 
     @Override
     public ConfigurationSerializable deserialize(JsonElement json,Type typeOfT,JsonDeserializationContext context) throws JsonParseException {
+        if (json.isJsonObject()) {
+            JsonObject jsonObject = json.getAsJsonObject();
+            if (jsonObject.has("item")) {
+                return ItemSerializer.itemStackFromBase64(jsonObject.get("item").getAsString());
+            }
+        }
+
         final Map<String, Object> map = new LinkedHashMap<>();
 
         for (Map.Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {
