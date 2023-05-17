@@ -29,7 +29,7 @@ public abstract class SimpleCommandHandler implements TabExecutor {
 	 */
 	public SimpleCommandHandler(String permission, String noPermissionMessage) {
 		this.permission = permission;
-		this.noPermissionMessage = noPermissionMessage == null ? null : Formatting.translate(noPermissionMessage);
+		this.noPermissionMessage = noPermissionMessage == null ? null : noPermissionMessage.contains("§") ? noPermissionMessage : Formatting.translate(noPermissionMessage);
 	}
 
 	/**
