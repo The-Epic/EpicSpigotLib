@@ -17,35 +17,16 @@ import java.util.function.Consumer;
 
 /**
  * A utility class for creating custom inventories with buttons and custom event handlers.
- *
- * <p>Instances of this class can be used to create custom inventories with buttons that perform custom
- * actions when clicked, and to register event handlers for when the inventory is clicked or closed.</p>
- *
- * <p>Example usage:</p>
- * <pre>{@code
- * CustomInventory inventory = new CustomInventory(holder, 3, "My Inventory");
- * inventory.addButton(4, new ItemStack(Material.DIAMOND), event -> {
- *     event.getWhoClicked().sendMessage("You clicked the diamond!");
- * });
- * inventory.addClickConsumer(event -> {
- *     event.getWhoClicked().sendMessage("You clicked the inventory!");
- * });
- * inventory.addCloseConsumer(event -> {
- *     event.getPlayer().sendMessage("You closed the inventory!");
- * });
- * inventory.open(player);
- * }</pre>
- *
- * <p>This class provides methods for adding and removing buttons from the inventory, adding event
+ * This class provides methods for adding and removing buttons from the inventory, adding event
  * handlers for when the inventory is clicked or closed, and adding or removing items from the inventory.</p>
  */
 public abstract class CustomInventory {
 
-	private Map<Integer, Consumer<InventoryClickEvent>> buttons = new HashMap<>();
-	private List<Consumer<InventoryClickEvent>> clickActions = new ArrayList<>();
-	private List<Consumer<InventoryCloseEvent>> closeActions = new ArrayList<>();
+	private final Map<Integer, Consumer<InventoryClickEvent>> buttons = new HashMap<>();
+	private final List<Consumer<InventoryClickEvent>> clickActions = new ArrayList<>();
+	private final List<Consumer<InventoryCloseEvent>> closeActions = new ArrayList<>();
 
-	private Inventory inventory;
+	private final Inventory inventory;
 
 	/**
 	 * Constructs a new custom inventory with the given parameters.
@@ -178,6 +159,4 @@ public abstract class CustomInventory {
 				", inventory=" + inventory +
 				'}';
 	}
-
-	public abstract void reload();
 }

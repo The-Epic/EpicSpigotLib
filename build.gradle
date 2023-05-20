@@ -33,7 +33,8 @@ subprojects {
             links(
                     'https://docs.oracle.com/en/java/javase/16/docs/api/',
                     'https://hub.spigotmc.org/javadocs/spigot/',
-                    'https://javadoc.io/doc/org.jetbrains/annotations/19.0.0'
+                    'https://javadoc.io/doc/org.jetbrains/annotations/19.0.0',
+                    'https://repo.jeff-media.com/javadoc/public/com/jeff_media/MorePersistentDataTypes/2.4.0/raw/'
             )
             tags(
                     "nms:a:Requires NMS"
