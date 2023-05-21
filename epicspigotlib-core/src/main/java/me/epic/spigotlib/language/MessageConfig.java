@@ -3,6 +3,7 @@ package me.epic.spigotlib.language;
 import me.epic.spigotlib.EpicSpigotLib;
 import me.epic.spigotlib.config.ConfigUpdater;
 import me.epic.spigotlib.formatting.Formatting;
+import me.epic.spigotlib.utils.ServerUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -16,8 +17,8 @@ import java.util.Map;
  */
 public class MessageConfig {
 
-    private Map<String, String> stringMap = new HashMap<>();
-    private Map<String, List<String>> stringListMap = new HashMap<>();
+    private final Map<String, String> stringMap = new HashMap<>();
+    private final Map<String, List<String>> stringListMap = new HashMap<>();
 
     private final File file;
     private YamlConfiguration configuration;
@@ -29,7 +30,7 @@ public class MessageConfig {
      */
     public MessageConfig(File file) {
         this.file = file;
-        ConfigUpdater.update(EpicSpigotLib.getPlugin(), "messages.yml", file);
+        if (!ServerUtils.isRunningMockBukkit()) ConfigUpdater.update(EpicSpigotLib.getPlugin(), "messages.yml", file);
         this.configuration = YamlConfiguration.loadConfiguration(file);
     }
 

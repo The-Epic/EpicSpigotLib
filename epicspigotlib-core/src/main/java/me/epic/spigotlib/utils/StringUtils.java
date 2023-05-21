@@ -14,7 +14,7 @@ public class StringUtils {
 	/**
 	 * A cache of compiled regular expression patterns for splitting strings into chunks of a certain size.
 	 */
-	private static Map<Integer, Pattern> regexCache = new HashMap<>();
+	private static final Map<Integer, Pattern> regexCache = new HashMap<>();
 
 	/**
 	 * A mapping of integer values to their corresponding Roman numeral symbols.
@@ -67,7 +67,7 @@ public class StringUtils {
 	 * @param number the integer to be converted
 	 * @return the specified integer in Roman numeral form
 	 */
-	public static final String toRomanNumeral(int number) {
+	public static String toRomanNumeral(int number) {
 		int l = romanMap.floorKey(number);
 		if (number == l) {
 			return romanMap.get(number);
