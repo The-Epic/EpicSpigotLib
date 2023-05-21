@@ -2,7 +2,6 @@ package me.epic.spigotlib.utils;
 
 import me.epic.spigotlib.EpicSpigotLib;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 /**
@@ -10,7 +9,7 @@ import org.bukkit.scheduler.BukkitTask;
  */
 public class SchedulerUtils {
 
-    private static JavaPlugin plugin = EpicSpigotLib.getPlugin(); // the plugin instance to use for scheduling tasks
+    private static final Plugin plugin = EpicSpigotLib.getPlugin(); // the plugin instance to use for scheduling tasks
 
     /**
      * Schedules a task to run after a delay of 10 seconds.

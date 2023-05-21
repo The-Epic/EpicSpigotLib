@@ -23,4 +23,11 @@ public class ServerUtils {
 
 		return "Offline";
 	}
+
+	/**
+	 * Gets whether this server is running MockBukkit
+	 */
+	public static boolean isRunningMockBukkit() {
+		return SERVER.getClass().getName().equals("be.seeseemelk.mockbukkit.ServerMock");
+	}
 }

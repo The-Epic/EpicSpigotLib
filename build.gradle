@@ -74,6 +74,7 @@ dependencies {
 shadowJar {
     archiveClassifier.set('')
     relocate 'com.jeff_media.morepersistentdatatypes', 'me.epic.morepersistentdatatypes'
+    relocate 'net.kyori', 'me.epic.kyori'
 }
 
 tasks.register('combineSourcesJar', Jar) {

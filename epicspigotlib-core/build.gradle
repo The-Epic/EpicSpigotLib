@@ -24,10 +24,10 @@ dependencies {
     compileOnly 'org.spigotmc:spigot:1.18-R0.1-SNAPSHOT'
     annotationProcessor 'org.projectlombok:lombok:1.18.24' // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.24' // Lombok
-    compileOnly "net.kyori:adventure-platform-bukkit:4.2.0" // Adventure
-    compileOnly 'net.kyori:adventure-api:4.13.0'// Adventure
-    compileOnly "net.kyori:adventure-text-minimessage:4.13.0"// Adventure
-    compileOnly 'com.zaxxer:HikariCP:5.0.1' // HikariCP - Database stuff
+    implementation "net.kyori:adventure-platform-bukkit:4.2.0" // Adventure
+    implementation 'net.kyori:adventure-api:4.13.0'// Adventure
+    implementation "net.kyori:adventure-text-minimessage:4.13.0"// Adventure
+    implementation 'com.zaxxer:HikariCP:5.0.1' // HikariCP - Database stuff
     implementation 'org.jetbrains:annotations:19.0.0' // Annotations
     implementation 'com.jeff_media:MorePersistentDataTypes:2.4.0' // MorePDC
     compileOnly 'net.essentialsx:EssentialsX:2.19.0' // EssentialsX api
