@@ -37,6 +37,11 @@ public class ItemBuilder {
 	private ItemBuilder() {
 	}
 
+	/**
+	 * Constructs a new ItemBuilder with the given material and amount of 1
+	 *
+	 * @param material the material of the item
+	 */
 	public ItemBuilder(Material material) {
 		this(material, 1);
 	}
@@ -64,6 +69,25 @@ public class ItemBuilder {
 		builder.meta = item.getItemMeta();
 
 		return builder;
+	}
+
+	/**
+	 * Constructs a new ItemBuilder with the given material and amount of 1
+	 *
+	 * @param material the material of the item
+	 */
+	public static ItemBuilder from(Material material) {
+		return from(material, 1);
+	}
+
+	/**
+	 * Constructs a new ItemBuilder with the given material and amount.
+	 *
+	 * @param material the material of the item
+	 * @param amount the amount of the item
+	 */
+	public static ItemBuilder from(Material material, int amount) {
+		return new ItemBuilder(material, amount);
 	}
 
 	/**

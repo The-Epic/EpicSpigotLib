@@ -125,4 +125,14 @@ public class PlayerUtils {
         }
         return Bukkit.getOfflinePlayer(name);
     }
+
+    /**
+     * Get the nearest player around an Entity
+     *
+     * @param player to check around
+     * @return Nearest Player
+     */
+    public static Player getNearestPlayer(Player player) {
+        return LocationUtils.getNearestPlayer(player.getLocation());
+    }
 }
