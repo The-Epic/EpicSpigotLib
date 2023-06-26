@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'me.epic'
-version '1.3.0-SNAPSHOT'
+version '1.4.0-SNAPSHOT'
 description "Epic's Spigot Lib"
 
 compileJava.options.encoding = "UTF-8"
@@ -63,7 +63,6 @@ allprojects {
 
 dependencies {
     implementation project(':epicspigotlib-core')
-    implementation project(path: ':spigot-1_17_R1', configuration: 'reobf')
     implementation project(path: ':spigot-1_18_R1', configuration: 'reobf')
     implementation project(path: ':spigot-1_18_R2', configuration: 'reobf')
     implementation project(path: ':spigot-1_19_R1', configuration: 'reobf')
