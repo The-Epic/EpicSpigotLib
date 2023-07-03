@@ -1,6 +1,5 @@
 package me.epic.spigotlib.nms;
 
-import lombok.Getter;
 import me.epic.spigotlib.Version;
 import me.epic.spigotlib.utils.ClassUtils;
 import org.bukkit.Bukkit;
@@ -11,13 +10,8 @@ import java.util.logging.Level;
 public class NMSManager {
     private static final String PACKAGE = "me.epic.spigotlib.nms.";
 
-    @Getter
     private static INMSAdapter adapter;
 
-
-    static {
-        init();
-    }
 
     public static void init() {
         if (adapter != null) return;
@@ -35,5 +29,11 @@ public class NMSManager {
         }
     }
 
+    public static INMSAdapter getAdapter() {
+        if (adapter == null) {
+            throw new RuntimeException("The nms adapter of EpicSpigotLib is required to be enabled.");
+        }
+        return adapter;
+    }
 
 }

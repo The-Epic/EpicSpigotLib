@@ -1,6 +1,6 @@
 package me.epic.spigotlib.language;
 
-import me.epic.spigotlib.EpicSpigotLib;
+import me.epic.spigotlib.internal.EpicSpigotLibInternal;
 import me.epic.spigotlib.config.ConfigUpdater;
 import me.epic.spigotlib.formatting.Formatting;
 import me.epic.spigotlib.utils.ServerUtils;
@@ -30,7 +30,7 @@ public class MessageConfig {
      */
     public MessageConfig(File file) {
         this.file = file;
-        if (!ServerUtils.isRunningMockBukkit()) ConfigUpdater.update(EpicSpigotLib.getPlugin(), "messages.yml", file);
+        if (!ServerUtils.isRunningMockBukkit()) ConfigUpdater.update(EpicSpigotLibInternal.getPlugin(), "messages.yml", file);
         this.configuration = YamlConfiguration.loadConfiguration(file);
     }
 

@@ -1,6 +1,6 @@
 package me.epic.spigotlib.inventory;
 
-import me.epic.spigotlib.EpicSpigotLib;
+import me.epic.spigotlib.internal.EpicSpigotLibInternal;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ public class CustomInventoryManager implements Listener {
     }
 
     public CustomInventoryManager() {
-        this(EpicSpigotLib.getPlugin());
+        this(EpicSpigotLibInternal.getPlugin());
     }
 
     public void openInventory(HumanEntity player, CustomInventory inventory) {

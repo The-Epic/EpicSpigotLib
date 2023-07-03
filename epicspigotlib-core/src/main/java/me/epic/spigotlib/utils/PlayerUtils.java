@@ -3,7 +3,7 @@ package me.epic.spigotlib.utils;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import lombok.SneakyThrows;
-import me.epic.spigotlib.EpicSpigotLib;
+import me.epic.spigotlib.internal.EpicSpigotLibInternal;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -12,7 +12,7 @@ public class PlayerUtils {
     private static Essentials essentialsPlugin = null;
 
     static {
-        Bukkit.getScheduler().runTask(EpicSpigotLib.getPlugin(), () -> {
+        Bukkit.getScheduler().runTask(EpicSpigotLibInternal.getPlugin(), () -> {
             if (Bukkit.getPluginManager().isPluginEnabled("Essentials")) essentialsPlugin = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         });
     }

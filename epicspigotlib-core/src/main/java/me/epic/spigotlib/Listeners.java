@@ -1,6 +1,7 @@
 package me.epic.spigotlib;
 
 import lombok.SneakyThrows;
+import me.epic.spigotlib.internal.EpicSpigotLibInternal;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,7 +31,7 @@ public class Listeners {
                     if (!Listener.class.isAssignableFrom(clazz)) continue;
                     Listener listener;
                     if (hasMainClassConstructor(clazz)){
-                        listener = (Listener) clazz.getConstructor(EpicSpigotLib.getPlugin().getClass()).newInstance(plugin);
+                        listener = (Listener) clazz.getConstructor(EpicSpigotLibInternal.getPlugin().getClass()).newInstance(plugin);
                     } else if (hasJavaPluginConstructor(clazz)) {
                         listener = (Listener) clazz.getConstructor(JavaPlugin.class).newInstance(plugin);
 
@@ -62,7 +63,7 @@ public class Listeners {
 
     private static boolean hasMainClassConstructor(Class<?> clazz) {
         for (Constructor<?> constructor : clazz.getConstructors()) {
-            if (constructor.getParameterCount() == 1 && constructor.getParameterTypes()[0] == EpicSpigotLib.getPlugin().getClass()) {
+            if (constructor.getParameterCount() == 1 && constructor.getParameterTypes()[0] == EpicSpigotLibInternal.getPlugin().getClass()) {
                 return true;
             }
         }
